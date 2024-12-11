@@ -25,35 +25,25 @@ func selectionSort(arr []int) {
 }
 ```
 Operasi diatas merupakan operasi mengurutkan angka dari terkecil ke terbesar dengan cara : Pertama, elemen terkecil pada array tersebut ditukar dengan elemen pertama. Lakukan hal ini sampai array terurut dari yang terkecil ke terbesar
-```go
-
-        fmt.Println("Perolehan suara:")
-        for i := 1; i <= 20; i++ {
-                if votes[i-1] > 0 {
-                        fmt.Printf("Calon %d: %d suara\n", i, votes[i-1])
-                }
-        }
-```
-Operasi diatas merupakan operasi memperlihatkan Perolehan suara untuk setiap calon.
 
 ## Soal 2
 ```go
-for {
-                var vote int
-                fmt.Scan(&vote)
-
-                if vote == 0 {
-                        break
-                }
-
-                if vote >= 1 && vote <= 20 {
-                        validVotes++
-                        votes[vote-1]++
-                }
-                totalVotes++
+func selectionSort(arr []int) {
+    n := len(arr)
+    for i := 0; i < n-1; i++ {
+        // Find the minimum element in unsorted array
+        minIndex := i
+        for j := i+1; j < n; j++ {
+            if arr[j] < arr[minIndex] {
+                minIndex = j
+            }
         }
+        // Swap the found minimum element with the first element
+        arr[i], arr[minIndex] = arr[minIndex], arr[i]
+    }
+}
 ```
-Operasi diatas merupakan operasi menginput suara. Jika inputan bernilai 0 maka proses inputan suara akan berakhir. Jika inputan bernilai 1 sampai 20 maka akan dimasukkan ke suara yang valid
+Operasi diatas merupakan operasi mengurutkan angka dari terkecil ke terbesar dengan cara : Pertama, elemen terkecil pada array tersebut ditukar dengan elemen pertama. Lakukan hal ini sampai array terurut dari yang terkecil ke terbesar
 
 ```go
 ketua, wakilKetua := -1, -1
