@@ -46,46 +46,71 @@ func selectionSort(arr []int) {
 Operasi diatas merupakan operasi mengurutkan angka dari terkecil ke terbesar dengan cara : Pertama, elemen terkecil pada array tersebut ditukar dengan elemen pertama. Lakukan hal ini sampai array terurut dari yang terkecil ke terbesar
 
 ```go
-ketua, wakilKetua := -1, -1
-    maxVotes, secondMaxVotes := 0, 0
-
-    for i := 0; i < 20; i++ {
-        if votes[i] > maxVotes {
-            secondMaxVotes = maxVotes
-            wakilKetua = ketua
-            maxVotes = votes[i]
-            ketua = i + 1
-        } else if votes[i] > secondMaxVotes {
-            secondMaxVotes = votes[i]
-            wakilKetua = i + 1
-        }
+func reverse(s []int) {
+    for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+        s[i], s[j] = s[j], s[i]
     }
+}
 ```
-Operasi diatas merupakan operasi Menentukan Ketua dan Wakil Ketua. Jika jumlah suara calon lebih besar dari maxVotes, maka calon tersebut menjadi ketua baru, dan nilai maxVotes dan secondMaxVotes diperbarui. Jika jumlah suara calon lebih besar dari secondMaxVotes tetapi tidak lebih besar dari maxVotes, maka calon tersebut menjadi wakil ketua baru, dan nilai secondMaxVotes diperbarui.
+Operasi diatas merupakan operasi membalik urutan elemen dalam sebuah slice. Ini dilakukan dengan menukar elemen dari ujung kiri dan kanan secara berpasangan hingga mencapai tengah slice.
+
+```go
+        var odd, even []int
+        for _, num := range nums {
+            if num%2 == 0 {
+                even = append(even, num)
+            } else {
+                odd = append(odd, num)
+            }
+        }
+```
+Operasi diatas merupakan operasi memisahkan nomor-nomor genap dan ganjil ke dalam slice even dan odd masing-masing.
 
 ## Soal 3
 ```go
-func isiArray(n int) {
-        for i := 0; i < n; i++ {
-                fmt.Scan(&data[i])
+func selectionSort(arr []int) {
+    n := len(arr)
+    for i := 0; i < n-1; i++ {
+        // Find the minimum element in unsorted array
+        minIndex := i
+        for j := i+1; j < n; j++ {
+            if arr[j] < arr[minIndex] {
+                minIndex = j
+            }
         }
+        // Swap the found minimum element with the first element
+        arr[i], arr[minIndex] = arr[minIndex], arr[i]
+    }
 }
 ```
-Operasi diatas merupakan operasi menginputkan nilai pada tiap elemen array sampai elemen array ke-n
+Operasi diatas merupakan operasi mengurutkan angka dari terkecil ke terbesar dengan cara : Pertama, elemen terkecil pada array tersebut ditukar dengan elemen pertama. Lakukan hal ini sampai array terurut dari yang terkecil ke terbesar
+
 ```go
-func posisi(n, k int) int {
-        left, right := 0, n-1
-        for left <= right {
-                mid := (left + right) / 2
-                if data[mid] == k {
-                        return mid
-                } else if data[mid] < k {
-                        left = mid + 1
-                } else {
-                        right = mid - 1
-                }
-        }
-        return -1
+func calculateMedian(arr []int) int {
+    n := len(arr)
+    if n%2 == 1 {
+        // Jika jumlah elemen ganjil, median adalah elemen tengah
+        return arr[n/2]
+    } else {
+        // Jika jumlah elemen genap, median adalah rerata dari dua elemen tengah
+        return (arr[n/2-1] + arr[n/2]) / 2
+    }
 }
 ```
-Operasi diatas merupakan operasi Pencarian indeks array yang memiliki nilai dicari oleh user menggunakan binary search.
+Operasi diatas merupakan operasi mencari nilai median dari data yang sudah diurutkan oleh selection sort sebelumnya. Jika jumlah elemen dalam slice ganjil, median adalah elemen tengah. Jika jumlah elemen dalam slice genap, median adalah rata-rata dari dua elemen tengah.
+
+```go
+for {
+        fmt.Scan(&input)
+        if input == -5313 {
+            break
+        } else if input == 0 {
+            // Urutkan data dan cetak median
+            selectionSort(data)
+            fmt.Println(calculateMedian(data))
+        } else {
+            // Tambahkan input ke dalam data
+            data = append(data, input)
+        }
+```
+Operasi diatas merupakan operasi menginput nilai pada array. dengan beberapa ketentuan : -5313: Angka ini bertindak sebagai "penanda akhir" input. Ketika pengguna memasukkan angka ini, program akan berhenti membaca input dan melakukan perhitungan. 0: Angka ini menandakan bahwa pengguna ingin menghitung median dari data yang sudah dimasukkan.
